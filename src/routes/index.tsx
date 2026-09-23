@@ -42,9 +42,9 @@ function Home() {
             </Reveal>
             <Reveal delay={90}>
               <h1 className="display-xl mt-8">
-                Need Something
+                Need Something?
                 <br />
-                ?
+                We got you!
               </h1>
             </Reveal>
             <Reveal delay={180}>
