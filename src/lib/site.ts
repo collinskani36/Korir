@@ -9,7 +9,7 @@ export const site = {
   tagline: "Sourcing. Procurement. Collection. Delivery.",
   location: "Eldoret, Kenya",
   /** e.g. "+254 700 000 000" */
-  phone: "0797 477 666" as string,
+  phone: "0728 696 553" as string,
   /** International format, digits only, e.g. "254700000000" */
   whatsapp: "254797477666" as string,
   /** e.g. "hello@korirassociates.co.ke" */
