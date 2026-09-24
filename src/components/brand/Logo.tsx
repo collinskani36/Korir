@@ -1,21 +1,19 @@
 import logo from "@/assets/korir-logo.jpg";
+import mark from "@/assets/korir-mark.png";
 import { cn } from "@/lib/utils";
 
 export function Mark({ className }: { className?: string | undefined }) {
   return (
     <span
       aria-hidden="true"
-      className={cn(
-        "block size-9 shrink-0 overflow-hidden bg-[oklch(0.145_0_0)]",
-        className,
-      )}
+      className={cn("block size-9 shrink-0 overflow-hidden", className)}
     >
       <img
-        src={logo}
+        src={mark}
         alt=""
         width={512}
         height={512}
-        className="size-full scale-[2.1] object-cover object-[47.5%_37.5%]"
+        className="size-full object-contain"
       />
     </span>
   );
