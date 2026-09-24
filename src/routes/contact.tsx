@@ -113,9 +113,7 @@ function Contact() {
               </div>
             </dl>
             <p className="text-muted-foreground mt-8 text-sm leading-relaxed">
-              Contact details shown as “to be confirmed” have not been published yet.
-              Send us the final phone number, WhatsApp number and email and they will
-              appear everywhere on the site.
+         
             </p>
           </Reveal>
 
