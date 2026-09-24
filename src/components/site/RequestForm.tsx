@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useSearch } from "@tanstack/react-router";
 import { Check, Paperclip, X } from "lucide-react";
 
 import { Mark } from "@/components/brand/Logo";
@@ -12,6 +12,17 @@ const actions = [
   "Deliver an item I already have",
   "Source and deliver",
 ] as const;
+
+// Maps the slug from ?category= back to a display label
+const categoryLabels: Record<string, string> = {
+  household: "Household",
+  "food-groceries": "Food & Groceries",
+  "electronics-technology": "Electronics & Technology",
+  "business-office": "Business & Office",
+  "hardware-supplies": "Hardware & Supplies",
+  "personal-shopping": "Personal & Shopping",
+  other: "Other",
+};
 
 const fieldClass =
   "w-full border-b border-input bg-transparent py-3 text-base placeholder:text-muted-foreground/60 focus:border-foreground focus:outline-none transition-colors";
@@ -27,6 +38,13 @@ export function RequestForm() {
   const [reference, setReference] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+
+  // Read optional ?category= query param — TanStack Router typed search
+  // Falls back gracefully if the param isn't present
+  const search = useSearch({ strict: false }) as { category?: string };
+  const prefilledCategory = search?.category
+    ? categoryLabels[search.category] ?? null
+    : null;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -77,7 +95,11 @@ export function RequestForm() {
         </div>
 
         <p className="text-muted-foreground mt-8 text-sm">
-          Prefer to talk first? <Link to="/contact" className="link-underline text-foreground">Contact us</Link>.
+          Prefer to talk first?{" "}
+          <Link to="/contact" className="link-underline text-foreground">
+            Contact us
+          </Link>
+          .
         </p>
       </div>
     );
@@ -96,6 +118,17 @@ export function RequestForm() {
         </div>
         <Mark className="size-10 shrink-0 md:size-12" />
       </div>
+
+      {/* Pre-filled category badge — shown only when arriving from a category card */}
+      {prefilledCategory && (
+        <div className="border-border mt-8 flex items-center gap-3 border-b pb-6">
+          <span className={labelClass}>Category</span>
+          <span className="bg-foreground text-background px-3 py-1 text-[0.6875rem] tracking-[0.16em] uppercase">
+            {prefilledCategory}
+          </span>
+          <input type="hidden" name="category" value={prefilledCategory} />
+        </div>
+      )}
 
       <div className="mt-12 grid gap-10 md:grid-cols-2">
         <div className="md:col-span-2">

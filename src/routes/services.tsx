@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { Mark } from "@/components/brand/Logo";
+import { CategoryCard } from "@/components/site/CategoryCard";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { categories, coreServices } from "@/lib/site";
@@ -72,26 +73,17 @@ function Services() {
             <h2 className="display-lg max-w-3xl">What Can We Help You Get?</h2>
             <p className="text-muted-foreground mt-6 max-w-2xl leading-relaxed">
               These are categories of requests we handle — not products for sale.
+              Tap any category to send a request.
             </p>
           </Reveal>
           <ul className="border-border mt-12 grid border-t border-l sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((category, i) => (
-              <li
+              <CategoryCard
                 key={category.title}
-                className="border-border hover:bg-secondary border-r border-b transition-colors"
-              >
-                <Reveal delay={(i % 3) * 70} className="h-full p-8">
-                  <span className="numeral text-muted-foreground text-xs">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-display mt-6 text-lg font-medium uppercase">
-                    {category.title}
-                  </h3>
-                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-                    {category.body}
-                  </p>
-                </Reveal>
-              </li>
+                title={category.title}
+                body={category.body}
+                index={i}
+              />
             ))}
           </ul>
         </div>

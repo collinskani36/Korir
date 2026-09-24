@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { BrandLockup, Mark } from "@/components/brand/Logo";
+import { CategoryCard } from "@/components/site/CategoryCard";
 import { Reveal } from "@/components/site/Reveal";
 import { categories, coreServices, steps, whatsappHref } from "@/lib/site";
 
@@ -50,7 +51,7 @@ function Home() {
             <Reveal delay={180}>
               <p className="text-muted-foreground mt-10 max-w-2xl text-base leading-relaxed md:text-xl">
                 Tell us what you need, where it is, and where you want it delivered.
-                We’ll help source it, collect it and get it to you.
+                We'll help source it, collect it and get it to you.
               </p>
             </Reveal>
             <Reveal delay={260}>
@@ -125,33 +126,28 @@ function Home() {
                 What Can We Help You Get?
               </h2>
               <p className="text-muted-foreground md:col-span-4 md:text-right">
-                Service categories — not a shop. If it can be bought in town, we can
-                help you get it.
+                Service categories — not a shop. If it can be bought in town, we
+                can help you get it.
               </p>
             </div>
           </Reveal>
 
           <ul className="border-border mt-14 grid border-t border-l sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((category, i) => (
-              <li
+              <CategoryCard
                 key={category.title}
-                className="border-border hover:bg-secondary border-r border-b transition-colors"
-              >
-                <Reveal delay={(i % 3) * 70} className="h-full p-8">
-                  <span className="numeral text-muted-foreground text-xs">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="font-display mt-6 text-lg font-medium tracking-[-0.01em] uppercase">
-                    {category.title}
-                  </h3>
-                  <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
-                    {category.body}
-                  </p>
-                </Reveal>
-              </li>
+                title={category.title}
+                body={category.body}
+                index={i}
+              />
             ))}
+            {/* CTA tile — no flip, stays as-is */}
             <li className="border-border bg-foreground text-background border-r border-b">
-              <Link to="/request" className="group flex h-full flex-col justify-between p-8">
+              <Link
+                to="/request"
+                className="group flex h-full flex-col justify-between p-8"
+                style={{ minHeight: "260px" }}
+              >
                 <span className="text-background/50 text-[0.6875rem] tracking-[0.22em] uppercase">
                   Start here
                 </span>
@@ -267,7 +263,6 @@ function Home() {
             >
               Business Enquiry <ArrowUpRight className="size-4" />
             </Link>
-
           </Reveal>
         </div>
       </section>
