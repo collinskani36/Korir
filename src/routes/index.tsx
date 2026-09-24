@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Korir & Associates — Need Something From Town?",
+        content: "Korir & Associates — Need Something Delivered?",
       },
       {
         property: "og:description",
